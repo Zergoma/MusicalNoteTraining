@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MusicalNoteTraining.MVVM.Views.TrainingView"
+             Title="TrainingView"
+             
+             xmlns:model="clr-namespace:MusicalNoteTraining.MVVM.Models"
+             xmlns:vm ="clr-namespace:MusicalNoteTraining.MVVM.ViewModels"
+             x:DataType="vm:TrainingViewModel">
+
+    <Grid RowDefinitions=".4*,.4*,.2*">
+        <Button VerticalOptions="Center" HorizontalOptions="Center" Text="Ecouter" WidthRequest="150" HeightRequest="100"
+                FontSize="25"
+                Command="{Binding PlaySoundCommand}"/>
+
+        <FlexLayout x:Name="NotesLayout"
+                    Grid.Row="1" Wrap="Wrap"
+                    Margin="20"
+                    JustifyContent="SpaceBetween"
+                    BindableLayout.ItemsSource="{Binding ResponsesNotes}">
+
+            <BindableLayout.ItemTemplate>
+                <DataTemplate x:DataType="model:MusicalNote">
+                    <Button
+                        StyleClass="NoteItem"
+                        Text="{Binding ., Converter={x:StaticResource noteconverter}}"
+                        Command="{Binding Source={x:Reference NotesLayout}, Path=BindingContext.CheckCommand}"
+                        CommandParameter="{Binding .}"/>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </FlexLayout>
+
+        <Label
+            x:Name="InfoLabel"
+            HorizontalOptions="Center"
+            FontSize="Large"
+            Grid.Row="2"
+            Text="{Binding Message}"
+            TextColor="{Binding MessageColor}"/>
+
+        <!--<Button Text="{Binding CurrentNote, Converter={x:StaticResource noteconverter}, StringFormat='!{0}!'}"/>-->
+
+    </Grid>
+
+
+</ContentPage>
