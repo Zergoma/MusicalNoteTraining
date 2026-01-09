@@ -65,6 +65,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="MVVM\Views\PlayView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Views\ResultView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

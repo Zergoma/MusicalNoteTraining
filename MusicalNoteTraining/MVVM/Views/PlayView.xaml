@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MusicalNoteTraining.MVVM.Views.PlayView"
+             xmlns:vm="clr-namespace:MusicalNoteTraining.MVVM.ViewModels"
+             xmlns:model="clr-namespace:MusicalNoteTraining.MVVM.Models"
+             Title="PlayView"
+             x:DataType="vm:PlayViewModel">
+
+    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+        
+        
+        <FlexLayout x:Name="FlexNotes"
+            Wrap="Wrap"
+            Margin="5"
+            JustifyContent="SpaceAround"
+            BindableLayout.ItemsSource="{Binding AllNotes}">
+
+            <BindableLayout.ItemTemplate>
+                <DataTemplate x:DataType="model:MusicalNote">
+                    <Button StyleClass="NoteItemPlay"
+                            Text="{Binding ., Converter={x:StaticResource noteconverter}}"
+                            FontSize="10"
+                            HeightRequest="300"
+                            WidthRequest="90"
+                            BorderColor="White"
+                            BorderWidth="2"
+                            BackgroundColor="{Binding color}"
+                            Command="{Binding Source={x:Reference FlexNotes}, Path=BindingContext.PlayCommand}"
+                            CommandParameter="{Binding .}"/>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </FlexLayout>
+
+        
+
+
+
+    </VerticalStackLayout>
+</ContentPage>

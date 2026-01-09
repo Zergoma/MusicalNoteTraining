@@ -3,8 +3,6 @@ namespace MusicalNoteTraining.MVVM.Views;
 
 public partial class TrainingView : ContentPage
 {
-    private CancellationTokenSource? _labelCts;
-
     public TrainingView(TrainingViewModel vm)
     {
         InitializeComponent();
