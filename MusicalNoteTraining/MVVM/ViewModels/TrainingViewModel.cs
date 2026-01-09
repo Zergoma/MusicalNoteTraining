@@ -27,6 +27,13 @@ namespace MusicalNoteTraining.MVVM.ViewModels
         public string message = string.Empty;
 
         [ObservableProperty]
+        public int errorCounter;
+
+        [ObservableProperty]
+        public int successCounter;
+
+
+        [ObservableProperty]
         public string messageColor = "Black";
 
         List<MusicalNote> allNotes;
@@ -40,42 +47,50 @@ namespace MusicalNoteTraining.MVVM.ViewModels
                 new()
                 {
                     MyNote = Notes.do1,
-                    path = "Do1.wav"
+                    path = "Do1.wav",
+                    color = "#CE313A",
                 },
                 new()
                 {
                     MyNote = Notes.re,
-                    path = "Re.wav"
+                    path = "Re.wav",
+                    color = "#F18B4D",
                 },
                 new()
                 {
                     MyNote = Notes.mi,
-                    path = "Mi.wav"
+                    path = "Mi.wav",
+                    color = "#DBC21D",
                 },
                 new()
                 {
                     MyNote = Notes.fa,
-                    path = "Fa.wav"
+                    path = "Fa.wav",
+                    color = "#0C8F4D",
                 },
                 new()
                 {
                     MyNote = Notes.sol,
-                    path = "Sol.wav"
+                    path = "Sol.wav",
+                    color = "#2497C3",
                 },
                 new()
                 {
                     MyNote = Notes.la,
-                    path = "La.wav"
+                    path = "La.wav",
+                    color = "#33659A",
                 },
                 new()
                 {
                     MyNote = Notes.si,
-                    path = "Si.wav"
+                    path = "Si.wav",
+                    color = "#725C9A",
                 },
                 new()
                 {
                     MyNote = Notes.do2,
-                    path = "Do2.wav"
+                    path = "Do2.wav",
+                    color = "#DF707C",
                 },
             };
 
@@ -107,12 +122,15 @@ namespace MusicalNoteTraining.MVVM.ViewModels
                 Randomize();
                 Message = "Good !";
                 MessageColor = "Green";
+                SuccessCounter++;
             }
             else
             {
                 Message = $"No";
                 MessageColor = "Red";
+                ErrorCounter++;
             }
+
             var audioPlayer = AudioManager.Current.CreatePlayer(await FileSystem.OpenAppPackageFileAsync(sender.path));
             audioPlayer?.Play();
         }

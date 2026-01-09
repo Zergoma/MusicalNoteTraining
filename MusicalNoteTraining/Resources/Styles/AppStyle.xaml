@@ -7,13 +7,11 @@
     <converter:NoteConverter x:Key="noteconverter"/>
 
     <Style TargetType="Button" Class="NoteItem">
-        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="CornerRadius" Value="50"/>
         <Setter Property="HeightRequest" Value="100"/>
         <Setter Property="WidthRequest" Value="100"/>
-        <Setter Property="BackgroundColor" Value="OrangeRed"/>
         <Setter Property="TextColor" Value="White"/>
         <Setter Property="FontAttributes" Value="Bold"/>
         <Setter Property="FontSize" Value="Large"/>
     </Style>
-
 </ResourceDictionary>
