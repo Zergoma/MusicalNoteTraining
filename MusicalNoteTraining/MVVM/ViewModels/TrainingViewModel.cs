@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using MusicalNoteTraining.Extentions;
+using MusicalNoteTraining.Extensions;
 using MusicalNoteTraining.MVVM.Models;
 using Plugin.Maui.Audio;
 using System;
@@ -74,13 +74,14 @@ namespace MusicalNoteTraining.MVVM.ViewModels
                 },
                 new()
                 {
-                    MyNote = Notes.si,
-                    path = "Si.wav"
+                    MyNote = Notes.do2,
+                    path = "Do2.wav"
                 },
             };
 
             rdn = Random.Shared;
 
+            CurrentNote = allNotes[rdn.Next(allNotes.Count)];
             Randomize();
         }
 
@@ -111,32 +112,32 @@ namespace MusicalNoteTraining.MVVM.ViewModels
             {
                 Message = $"No";
                 MessageColor = "Red";
-                var audioPlayer = AudioManager.Current.CreatePlayer(await FileSystem.OpenAppPackageFileAsync(sender.path));
-                audioPlayer?.Play();
             }
+            var audioPlayer = AudioManager.Current.CreatePlayer(await FileSystem.OpenAppPackageFileAsync(sender.path));
+            audioPlayer?.Play();
         }
 
         private void Randomize()
         {
+            var oldNote = CurrentNote;
 
-            var indexes = Enumerable.Range(0, allNotes.Count).ToArray();
-            rdn.Shuffle(indexes);
-            
-            var _4first = indexes.Take(4);
+            var filtredNotes = allNotes
+            .Where(n => n != oldNote)
+            .ToList();
+
+            CurrentNote = filtredNotes[rdn.Next(filtredNotes.Count)];
+
+            filtredNotes.ShuffleIt();
+            var otherResponses = filtredNotes
+                .Where(n => n != CurrentNote)
+                .Take(3)
+                .ToList();
+            otherResponses.Add(CurrentNote);
+
+            otherResponses.ShuffleIt();
 
             ResponsesNotes.Clear();
-            
-            foreach (var i in _4first)
-            {
-                ResponsesNotes.Add(allNotes[i]);
-            }
-
-            var arr = _4first.ToArray();
-            rdn.Shuffle(arr);
-
-            CurrentNote = allNotes[arr[0]];
-
-
+            otherResponses.ForEach(ResponsesNotes.Add);
         }
     }
 }

@@ -16,7 +16,7 @@
         <FlexLayout x:Name="NotesLayout"
                     Grid.Row="1" Wrap="Wrap"
                     Margin="20"
-                    JustifyContent="SpaceBetween"
+                    JustifyContent="SpaceAround"
                     BindableLayout.ItemsSource="{Binding ResponsesNotes}">
 
             <BindableLayout.ItemTemplate>

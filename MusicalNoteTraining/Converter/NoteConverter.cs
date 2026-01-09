@@ -1,4 +1,4 @@
-﻿using MusicalNoteTraining.Extentions;
+﻿using MusicalNoteTraining.Extensions;
 using MusicalNoteTraining.MVVM.Models;
 using System;
 using System.Collections.Generic;

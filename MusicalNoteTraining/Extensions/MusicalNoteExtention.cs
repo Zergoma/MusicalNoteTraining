@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MusicalNoteTraining.Extentions
+namespace MusicalNoteTraining.Extensions
 {
     public static class MusicalNoteExtention
     {
