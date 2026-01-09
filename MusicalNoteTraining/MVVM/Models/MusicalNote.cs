@@ -10,5 +10,6 @@ namespace MusicalNoteTraining.MVVM.Models
     {
         public required Notes MyNote{ get; set; }
         public required string path { get; set; }
+        public required string color { get; set; }
     }
 }

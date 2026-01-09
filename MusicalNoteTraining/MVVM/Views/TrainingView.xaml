@@ -6,12 +6,57 @@
              
              xmlns:model="clr-namespace:MusicalNoteTraining.MVVM.Models"
              xmlns:vm ="clr-namespace:MusicalNoteTraining.MVVM.ViewModels"
-             x:DataType="vm:TrainingViewModel">
+             x:DataType="vm:TrainingViewModel"
+             BackgroundColor="#fdfffc">
 
+    <ContentPage.Background>
+        <LinearGradientBrush EndPoint="1,1">
+            <GradientStopCollection>
+                <GradientStop Offset=".0" Color="#FD1D1D"/>
+                <GradientStop Offset=".5" Color="#FCB045"/>
+            </GradientStopCollection>
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <ContentPage.Resources>
+        <Color x:Key="SuccessResultTitle">#15b097</Color>
+        <Color x:Key="SuccessResultValue">#71f79f</Color>
+
+        <Color x:Key="ErrorResultTitle">#f18805</Color>
+        <Color x:Key="ErrorResultValue">#f0a202</Color>
+
+
+        <Color x:Key="ResultBg">#1b2021</Color>
+        <Color x:Key="ResultBgDark">#6494aa</Color>
+
+        <Style TargetType="Label" Class="TitleResult">
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontAttributes" Value="Bold" />
+        </Style>
+        
+
+    </ContentPage.Resources>
+    
     <Grid RowDefinitions=".4*,.4*,.2*">
-        <Button VerticalOptions="Center" HorizontalOptions="Center" Text="Ecouter" WidthRequest="150" HeightRequest="100"
+        <Button VerticalOptions="Center" HorizontalOptions="Center" Text="Écouter" WidthRequest="150" HeightRequest="100"
+                CornerRadius="50"
                 FontSize="25"
-                Command="{Binding PlaySoundCommand}"/>
+                BorderColor="White"
+                BorderWidth="5"
+                Command="{Binding PlaySoundCommand}">
+
+            <Button.Background>
+                <LinearGradientBrush EndPoint="1,1">
+                    <GradientStopCollection>
+                        <GradientStop Offset="0" Color="#051937"/>
+                        <GradientStop Offset=".25" Color="#004d7a"/>
+                        <GradientStop Offset=".65" Color="#008793"/>
+                        <GradientStop Offset=".85" Color="#00bf72"/>
+                        
+                    </GradientStopCollection>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
 
         <FlexLayout x:Name="NotesLayout"
                     Grid.Row="1" Wrap="Wrap"
@@ -24,22 +69,59 @@
                     <Button
                         StyleClass="NoteItem"
                         Text="{Binding ., Converter={x:StaticResource noteconverter}}"
+                        BorderColor="White"
+                        BorderWidth="2"
+                        BackgroundColor="{Binding color}"
                         Command="{Binding Source={x:Reference NotesLayout}, Path=BindingContext.CheckCommand}"
                         CommandParameter="{Binding .}"/>
                 </DataTemplate>
             </BindableLayout.ItemTemplate>
         </FlexLayout>
 
-        <Label
-            x:Name="InfoLabel"
-            HorizontalOptions="Center"
-            FontSize="Large"
-            Grid.Row="2"
-            Text="{Binding Message}"
-            TextColor="{Binding MessageColor}"/>
+        <Grid Grid.Row="2" RowDefinitions=".5*,.2*,.5*">
 
-        <!--<Button Text="{Binding CurrentNote, Converter={x:StaticResource noteconverter}, StringFormat='!{0}!'}"/>-->
+            <Label
+                   x:Name="InfoLabel"
+                   HorizontalOptions="Center"
+                   FontSize="36"
+                   FontAttributes="Bold"
+                   Text="{Binding Message}"
+                   TextColor="{Binding MessageColor}"/>
+            
+            <Border Grid.Row="2" HorizontalOptions="End" VerticalOptions="End"
+                    Margin="0,0,10,10"
+                    WidthRequest="140" HeightRequest="50"
+                    Stroke="Transparent"
+                    StrokeShape="RoundRectangle 10">
 
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="1,1">
+                        <GradientStopCollection>
+                            <GradientStop Offset="0" Color="#008793"/>
+                            <GradientStop Offset="1" Color="#235789"/>
+                        </GradientStopCollection>
+                    </LinearGradientBrush>
+                </Border.Background>
+                
+                
+                <Grid RowDefinitions=".5*,.5*" ColumnDefinitions=".5*,.5*"
+                      VerticalOptions="Center" HorizontalOptions="Center">
+                    <Label Grid.Row="0" Grid.Column="0"
+                           Text="Success: " TextColor="{StaticResource SuccessResultTitle}"/>
+                    
+                    <Label Grid.Row="1" Grid.Column="0"
+                           Text="Error: " TextColor="{StaticResource ErrorResultTitle}"/>
+                    
+                    <Label Grid.Row="0" Grid.Column="1" HorizontalOptions="End"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource SuccessResultValue}" Text="{Binding SuccessCounter}"/>
+                    
+                    <Label Grid.Row="1" Grid.Column="1" HorizontalOptions="End" 
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource ErrorResultValue}" Text="{Binding ErrorCounter}"/>
+                </Grid>
+            </Border>
+        </Grid>
     </Grid>
 
 
