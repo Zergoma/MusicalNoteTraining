@@ -13,7 +13,7 @@ namespace MusicalNoteTraining
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            return new Window(new TrainingView(new TrainingViewModel()));
+            return new Window(new AppShell());
         }
     }
 }

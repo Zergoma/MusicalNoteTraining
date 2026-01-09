@@ -25,6 +25,9 @@ namespace MusicalNoteTraining
             builder.Services.AddTransient<TrainingViewModel>();
             builder.Services.AddTransient<TrainingView>();
 
+            builder.Services.AddTransient<PlayView>();
+            builder.Services.AddTransient<PlayViewModel>();
+
             builder.AddAudio();
 
             return builder.Build();
