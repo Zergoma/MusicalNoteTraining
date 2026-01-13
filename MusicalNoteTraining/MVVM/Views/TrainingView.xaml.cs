@@ -1,3 +1,4 @@
+using MusicalNoteTraining.Abstraction;
 using MusicalNoteTraining.MVVM.ViewModels;
 namespace MusicalNoteTraining.MVVM.Views;
 
@@ -11,6 +12,16 @@ public partial class TrainingView : ContentPage
         {
             await ShowLabelAsync();
         };
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        if (BindingContext is INeedInitilization viewModel)
+        {
+            viewModel.Initialize();
+        }
+
     }
 
     private async Task ShowLabelAsync()

@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MusicalNoteTraining.Abstraction;
 using MusicalNoteTraining.Extensions;
 using MusicalNoteTraining.MVVM.Models;
+using MusicalNoteTraining.Services;
 using Plugin.Maui.Audio;
 using System;
 using System.Collections;
@@ -13,7 +15,7 @@ using System.Text;
 
 namespace MusicalNoteTraining.MVVM.ViewModels
 {
-    public partial class TrainingViewModel : ObservableObject
+    public partial class TrainingViewModel : ObservableObject, INeedInitilization
     {
         public event Action? ShowInfoRequested;
 
@@ -36,65 +38,20 @@ namespace MusicalNoteTraining.MVVM.ViewModels
         [ObservableProperty]
         public string messageColor = "Black";
 
-        List<MusicalNote> allNotes;
+        List<MusicalNote> allNotes = [];
 
         Random rdn;
+        private readonly IMusicalNotesProducer producerService;
 
-        public TrainingViewModel()
+        public TrainingViewModel(IMusicalNotesProducer producer)
         {
-            allNotes = new()
-            {
-                new()
-                {
-                    MyNote = Notes.do1,
-                    path = "Do1.wav",
-                    color = "#CE313A",
-                },
-                new()
-                {
-                    MyNote = Notes.re,
-                    path = "Re.wav",
-                    color = "#F18B4D",
-                },
-                new()
-                {
-                    MyNote = Notes.mi,
-                    path = "Mi.wav",
-                    color = "#DBC21D",
-                },
-                new()
-                {
-                    MyNote = Notes.fa,
-                    path = "Fa.wav",
-                    color = "#0C8F4D",
-                },
-                new()
-                {
-                    MyNote = Notes.sol,
-                    path = "Sol.wav",
-                    color = "#2497C3",
-                },
-                new()
-                {
-                    MyNote = Notes.la,
-                    path = "La.wav",
-                    color = "#33659A",
-                },
-                new()
-                {
-                    MyNote = Notes.si,
-                    path = "Si.wav",
-                    color = "#725C9A",
-                },
-                new()
-                {
-                    MyNote = Notes.do2,
-                    path = "Do2.wav",
-                    color = "#DF707C",
-                },
-            };
-
+            producerService = producer;
             rdn = Random.Shared;
+        }
+
+        public async void Initialize()
+        {
+            allNotes = await producerService.GetMusicalNote();
 
             CurrentNote = allNotes[rdn.Next(allNotes.Count)];
             Randomize();
