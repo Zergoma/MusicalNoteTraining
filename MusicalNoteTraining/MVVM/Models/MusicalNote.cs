@@ -8,8 +8,8 @@ namespace MusicalNoteTraining.MVVM.Models
 
     public class MusicalNote
     {
-        public required Notes MyNote{ get; set; }
-        public required string path { get; set; }
-        public required string color { get; set; }
+        public required Notes MyNote{ get; init; }
+        public required string path { get; init; }
+        public required string color { get; init; }
     }
 }
