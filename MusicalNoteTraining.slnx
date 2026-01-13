@@ -1,3 +1,7 @@
 <Solution>
-  <Project Path="MusicalNoteTraining/MusicalNoteTraining.csproj" />
+  <Project Path="MusicalNoteTraining.Business/MusicalNoteTraining.Business.csproj" Id="ded25a08-0f45-4662-aad6-9ab8832f0a50" />
+  <Project Path="MusicalNoteTraining.Utilities/MusicalNoteTraining.Utilities.csproj" Id="096ec76b-2455-40fc-9ec9-b10fb31b8a15" />
+  <Project Path="MusicalNoteTraining/MusicalNoteTraining.Frontend.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
 </Solution>
