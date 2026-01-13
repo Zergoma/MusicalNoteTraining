@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using MusicalNoteTraining.MVVM.ViewModels;
 using MusicalNoteTraining.MVVM.Views;
+using MusicalNoteTraining.Services;
 using Plugin.Maui.Audio;
 
 namespace MusicalNoteTraining
@@ -27,6 +28,9 @@ namespace MusicalNoteTraining
 
             builder.Services.AddTransient<PlayView>();
             builder.Services.AddTransient<PlayViewModel>();
+
+
+            builder.Services.AddTransient<IMusicalNotesProducer, MetallophoneNoteProducer>();
 
             builder.AddAudio();
 
