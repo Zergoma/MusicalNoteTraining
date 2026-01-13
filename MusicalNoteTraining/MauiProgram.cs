@@ -3,6 +3,7 @@ using MusicalNoteTraining.MVVM.ViewModels;
 using MusicalNoteTraining.MVVM.Views;
 using MusicalNoteTraining.Services;
 using Plugin.Maui.Audio;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace MusicalNoteTraining
 {
@@ -33,6 +34,7 @@ namespace MusicalNoteTraining
             builder.Services.AddTransient<IMusicalNotesProducer, MetallophoneNoteProducer>();
 
             builder.AddAudio();
+            builder.UseSkiaSharp();
 
             return builder.Build();
         }
