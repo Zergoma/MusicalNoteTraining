@@ -92,6 +92,12 @@ namespace MusicalNoteTraining.MVVM.ViewModels
             audioPlayer?.Play();
         }
 
+        [RelayCommand]
+        void OpenShell()
+        {
+            Shell.Current.FlyoutIsPresented = true;
+        }
+
         private void Randomize()
         {
             var oldNote = CurrentNote;

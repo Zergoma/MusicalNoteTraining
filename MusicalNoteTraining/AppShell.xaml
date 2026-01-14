@@ -4,27 +4,82 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:view="clr-namespace:MusicalNoteTraining.MVVM.Views"
+    xmlns:ski="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
     Title="MusicalNoteTraining">
 
 
+    <Shell.FlyoutBackdrop>
+        <LinearGradientBrush EndPoint="0,1">
+            <GradientStop Offset="0.2" Color="Orange"/>
+            <GradientStop Offset="0.6" Color="Red"/>
+        </LinearGradientBrush>
+    </Shell.FlyoutBackdrop>
+    
+    <Shell.FlyoutHeader>
+        <Grid RowDefinitions=".2*,.8*" HeightRequest="200">
+            <Label Margin="10,10,0,0" Text="Jeux" TextColor="White" FontSize="Title"/>
+            <ski:SKLottieView Margin="20" Grid.Row="1" RepeatCount="-1" HeightRequest="150" Source="music.json"/>
+        </Grid>    
+    </Shell.FlyoutHeader>
 
-    <FlyoutItem Title="Oreille">
+    <Shell.FlyoutFooter>
+        <Grid HeightRequest="70" RowDefinitions=".2*,.3*,.2*" BackgroundColor="#D3D3D3">
+            <Label FontAttributes="Bold" HorizontalOptions="Center" TextColor="#3F3F3F" Text="Powered by:"/>
+            <Label Grid.Row="1" FontAttributes="Bold" FontSize="25" HorizontalOptions="Center" TextColor="#3F3F3F" Text="Tachikoma"/>
+        </Grid>
+    </Shell.FlyoutFooter>
 
-        <Tab Title="Musique">
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid HeightRequest="75">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonState">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter TargetName="lab" Property="Label.TextColor" Value="Blue"/>
+                                    <Setter TargetName="rect" Property="Rectangle.Fill" Value="Blue"/>
+                                </VisualState.Setters>
+                            </VisualState>
 
-            <ShellContent
-            Title="Oreille"
-            ContentTemplate="{DataTemplate view:TrainingView}"/>
+                            <VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter TargetName="lab" Property="Label.TextColor" Value="OrangeRed"/>
+                                    <Setter TargetName="rect" Property="Rectangle.Fill" Value="OrangeRed"/>
+                                </VisualState.Setters>
+                            </VisualState>
+
+                        </VisualStateGroup>
+                    </VisualStateGroupList>    
+                </VisualStateManager.VisualStateGroups>
+                
+                
+                <Label x:Name="lab" Margin="10,0,0,0" Text="{Binding Title}" FontSize="25" TextColor="Blue" FontAttributes="Bold" />
+                <Rectangle x:Name="rect" Fill="Blue" Opacity=".1"/>
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+
+    <FlyoutItem Title="Oreille"
+                Route="oreille_flyout">
+
+        <Tab Title="Training"
+             Route="training_tab">
+
+            <ShellContent Title="Oreille" 
+                          Route="absolute_hear_training_view"
+                          ContentTemplate="{DataTemplate view:TrainingView}"/>
         </Tab>
 
     </FlyoutItem>
 
-    <FlyoutItem Title="Metallophone">
+    <FlyoutItem Title="Metallophone" Route="MetallophoneFlyout">
 
-        <Tab Title="Musique">
-            <ShellContent
-        Title="MetalloPhone"
-        ContentTemplate="{DataTemplate view:PlayView}"/>
+        <Tab Title="Instrument" 
+             Route="instrumentTab">
+            <ShellContent Title="MetalloPhone" 
+                          Route="metallophone_play_view"
+                          ContentTemplate="{DataTemplate view:PlayView}"/>
         </Tab>
 
     </FlyoutItem>
