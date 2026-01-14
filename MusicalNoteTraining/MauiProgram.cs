@@ -30,6 +30,8 @@ namespace MusicalNoteTraining
             builder.Services.AddTransient<PlayView>();
             builder.Services.AddTransient<PlayViewModel>();
 
+            builder.Services.AddSingleton<App>();
+            builder.Services.AddTransient<AppShell>();
 
             builder.Services.AddTransient<IMusicalNotesProducer, MetallophoneNoteProducer>();
 

@@ -60,20 +60,25 @@
         </DataTemplate>
     </Shell.ItemTemplate>
 
-    <FlyoutItem Title="Oreille">
+    <FlyoutItem Title="Oreille"
+                Route="oreille_flyout">
 
-        <Tab Title="Musique">
+        <Tab Title="Training"
+             Route="training_tab">
 
-            <ShellContent Title="Oreille"
+            <ShellContent Title="Oreille" 
+                          Route="absolute_hear_training_view"
                           ContentTemplate="{DataTemplate view:TrainingView}"/>
         </Tab>
 
     </FlyoutItem>
 
-    <FlyoutItem Title="Metallophone">
+    <FlyoutItem Title="Metallophone" Route="MetallophoneFlyout">
 
-        <Tab Title="Musique">
+        <Tab Title="Instrument" 
+             Route="instrumentTab">
             <ShellContent Title="MetalloPhone" 
+                          Route="metallophone_play_view"
                           ContentTemplate="{DataTemplate view:PlayView}"/>
         </Tab>
 
